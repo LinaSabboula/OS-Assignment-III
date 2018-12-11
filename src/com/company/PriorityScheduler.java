@@ -8,11 +8,10 @@ import java.util.PriorityQueue;
 public class PriorityScheduler {
     private Process[] processes;
     private ArrayList<Process> processQueue = new ArrayList<Process>();
-    int currentTime = 0;
-    int waitingTime = 0;
-    int turnAroundTime = 0;
+    private int currentTime = 0;
     static int index = 0;
-    int processesCount;
+    private int remainingTime;
+    private int processesCount;
 
     //arr should be sorted based on arrival time
     PriorityScheduler(Process[] arr){
@@ -24,10 +23,26 @@ public class PriorityScheduler {
     }
     void startScheduler(){
         while(processesCount != 0){
-
+            if(currentTime == 0){
+                addProcess(processes[0]);
+                runProcess(processes[0]);
+                while(currentTime != findNextProcess()) { //one process in queue
+                    currentTime++;
+                    int remainingTime = processQueue.get(0).getBurstTime();
+                    remainingTime--;
+                }
+                //processQueue.get(index).setRemainingTime(remainingTime);
+                if (processQueue.get(index).getRemainingTime() == 0)
+                    processesCount--;
+                addProcess(processes[index + 1]);
+                if(index != findHighestPriority()){//higher priority exists in queue
+                    processQueue.get(index).waitingTime++;
+                }
+            }
         }
     }
-    void addProcess(){}
+    void runProcess(Process p){}
+    void addProcess(Process p){}
 
     int findHighestPriority(){
         int min = processQueue.get(0).getProcessPriority();
@@ -41,7 +56,7 @@ public class PriorityScheduler {
         return priorityIndex;
     }
     int findNextProcess(){
-        return processQueue.get(index).getArrivalTime();
+        return processQueue.get(processQueue.size()).getArrivalTime();
     }
     Process extractProcess(int index){}
 
