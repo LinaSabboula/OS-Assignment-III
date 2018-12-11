@@ -24,6 +24,7 @@ public class PriorityScheduler {
     }
     void startScheduler(){
         while(processesCount != 0){
+
         }
     }
     void addProcess(){}
@@ -39,7 +40,9 @@ public class PriorityScheduler {
         }
         return priorityIndex;
     }
-
+    int findNextProcess(){
+        return processQueue.get(index).getArrivalTime();
+    }
     Process extractProcess(int index){}
 
     void ageProcesses(){}
