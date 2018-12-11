@@ -5,25 +5,31 @@ public class Process extends Thread{
     private int burstTime = 0;
     private int quantum = 0;
     private int remainingTime = 0;
+    private int arrivalTime = 0;
 
-    public Process(String n, int bt){
+    public Process(String n,int at, int bt){
         super(n);
+        arrivalTime = at;
         burstTime = bt;
         remainingTime = burstTime;
     }
-    public Process(String n, int bt, int q){
+    public Process(String n,int at, int bt, int q){
         super(n);
+        arrivalTime = at;
         burstTime = bt;
         remainingTime = burstTime;
         quantum = q;
     }
-    public Process(String n, int bt, int q, int p){
+    public Process(String n,int at, int bt, int q, int p){
         super(n);
+        arrivalTime = at;
         burstTime = bt;
         remainingTime = burstTime;
         quantum = q;
         processPriority = p;
     }
+
+    public int getArrivalTime() { return arrivalTime; }
 
     public int getBurstTime() {
         return burstTime;
@@ -35,6 +41,10 @@ public class Process extends Thread{
 
     public int getProcessPriority() {
         return processPriority;
+    }
+
+    public void setArrivalTime(int arrivalTime) {
+        this.arrivalTime = arrivalTime;
     }
 
     public void setProcessPriority(int processPriority) {
