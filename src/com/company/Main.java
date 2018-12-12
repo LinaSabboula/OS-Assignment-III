@@ -1,4 +1,5 @@
 package com.company;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -7,14 +8,14 @@ public class Main {
 	Scanner s = new Scanner(System.in);
 	System.out.println("Enter Number of process: ");
 	int n= s.nextInt();
-	System.out.println("Enter RR Quantam: ");
+	System.out.println("Enter RR Quantum: ");
 	int rq = s.nextInt();
 	System.out.println("Enter Context Switch Time: ");
 	int t = s.nextInt();
 	ArrayList <Process> processList= new ArrayList<Process>();
 	for(int i=0;i<n;i++) {
-        Process p= new Process();
-        String name, int arrivalTime, burstTime,priority, quantam;
+        String name;
+        int arrivalTime, burstTime,priority, quantum;
         System.out.println("Enter name of process" + i+1 +" : "  );
         name= s.next();
         System.out.println("Enter Arrival Time of process" + i+1 +" : "  );
@@ -24,8 +25,8 @@ public class Main {
         System.out.println("Enter Priority of process" + i+1 +" : "  );
         priority= s.nextInt();
         System.out.println("Enter Quantum of process" + i+1 +" : "  );
-        quantam=s.nextInt();
-        p(name,arrivalTime,burstTime,priority,quantam);
+        quantum=s.nextInt();
+        Process p = new Process(name,arrivalTime,burstTime,priority,quantum);
 	    processList.add(p);
         }
 
