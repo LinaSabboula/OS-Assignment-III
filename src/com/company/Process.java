@@ -1,27 +1,15 @@
 package com.company;
 
-public class Process extends Thread{
+public class Process {
     private int processPriority = 0;
     private int burstTime = 0;
     private int quantum = 0;
     private int remainingTime = 0;
     private int arrivalTime = 0;
+    private String processName;
 
-    public Process(String n,int at, int bt){
-        super(n);
-        arrivalTime = at;
-        burstTime = bt;
-        remainingTime = burstTime;
-    }
-    public Process(String n,int at, int bt, int q){
-        super(n);
-        arrivalTime = at;
-        burstTime = bt;
-        remainingTime = burstTime;
-        quantum = q;
-    }
     public Process(String n,int at, int bt, int q, int p){
-        super(n);
+        processName=n;
         arrivalTime = at;
         burstTime = bt;
         remainingTime = burstTime;
@@ -59,18 +47,4 @@ public class Process extends Thread{
         this.quantum = quantum;
     }
 
-    @Override
-    public void run(){
-        while (remainingTime > 0){
-            System.out.println(getName() + " is running!");
-            try {
-                wait(1000);
-            }
-            catch(InterruptedException e){
-                e.printStackTrace();
-            }
-            remainingTime--;
-        }
-        System.out.println(getName() + " has finished!");
-    }
 }
