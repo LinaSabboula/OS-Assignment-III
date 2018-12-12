@@ -9,7 +9,8 @@ public class PriorityScheduler {
     private Process[] processes;
     private ArrayList<Process> processQueue = new ArrayList<Process>();
     private int currentTime = 0;
-    static int index = 0;
+    private int currentProcessIndex = 0;
+    private Process currentProcess;
     private int remainingTime;
     private int processesCount;
 
@@ -20,27 +21,34 @@ public class PriorityScheduler {
             processes[i] = arr[i];
         }
         processesCount = arr.length;
+        currentTime = processes[0].getArrivalTime();
+        currentProcess = processes[0];
+        currentProcessIndex = 0;
     }
     void startScheduler(){
-        while(processesCount != 0){
-            if(currentTime == 0){
-                addProcess(processes[0]);
-                runProcess(processes[0]);
-                while(currentTime != findNextProcess()) { //one process in queue
-                    currentTime++;
-                    int remainingTime = processQueue.get(0).getBurstTime();
-                    remainingTime--;
+        while(processesCount != 0) {
+            while(currentTime < nextProcessArrival()) {
+                runProcess(currentProcess);
+                currentTime++;
+                //remainingTime--; //TODO remaining time var in Process
+                for (int i = 0; i < processQueue.size(); i++) {
+                    //processQueue.get(i).incrementWaiting(); //TODO increment waiting func,
+                    // //TODO waitingTime var in Process
                 }
-                //processQueue.get(index).setRemainingTime(remainingTime);
-                if (processQueue.get(index).getRemainingTime() == 0)
+            }if(currentProcess.getRemainingTime() > 0)
+                addProcess(currentProcess); //add unfinished process at end of queue
+           // addProcess(getProcessbyIndex(currentProcessIndex + 1)); //add the next process into queue
+            //TODO getprocessbyindex(index)
+            else//if finished
+                {
                     processesCount--;
-                addProcess(processes[index + 1]);
-                if(index != findHighestPriority()){//higher priority exists in queue
-                    processQueue.get(index).waitingTime++;
                 }
-            }
+            currentProcessIndex = findHighestPriority();
+            currentProcess = processQueue.get(currentProcessIndex);
+            processQueue.remove(currentProcess);
         }
     }
+
     void runProcess(Process p){}
     void addProcess(Process p){}
 
@@ -55,7 +63,7 @@ public class PriorityScheduler {
         }
         return priorityIndex;
     }
-    int findNextProcess(){
+    int nextProcessArrival(){
         return processQueue.get(processQueue.size()).getArrivalTime();
     }
     Process extractProcess(int index){}
