@@ -33,19 +33,17 @@ public class PriorityScheduler {
             while(currentTime < nextProcessArrival()) {
                 runProcess(currentProcess);
                 currentTime++;
-                //remainingTime--; //TODO remaining time var in Process
+                currentProcess.setRemainingTime(currentProcess.getRemainingTime() - 1);
                 for (int i = 0; i < processQueue.size(); i++) {
-                    //processQueue.get(i).incrementWaiting(); //TODO increment waiting func,
-                    // //TODO waitingTime var in Process
+                    processQueue.get(i).setWaitingTime(processQueue.get(i).getWaitingTime() + 1);
                 }
             }if(currentProcess.getRemainingTime() > 0)
                 addProcess(currentProcess); //add unfinished process at end of queue
+            else{ //if finished
+                processesCount--;
+            }
            // addProcess(getProcessbyIndex(currentProcessIndex + 1)); //add the next process into queue
-            //TODO getprocessbyindex(index)
-            else//if finished
-                {
-                    processesCount--;
-                }
+            addProcess(getQueuedProcess(currentProcessIndex + 1));
             currentProcessIndex = findHighestPriority();
             currentProcess = processQueue.get(currentProcessIndex);
             processQueue.remove(currentProcess);
@@ -71,16 +69,16 @@ public class PriorityScheduler {
     int nextProcessArrival(){
         return processes[currentProcessIndex + 1].getArrivalTime();
     }
-    Process extractProcess(int index){}
-
-    void ageProcesses(){}
-
-    double averageWaitingTime(){}
-
-    double averageTurnAroundTime(){}
-
-    int getWaitingTime(Process p){}
-
-    int getTurnAroundTime(Process p){}
+//    Process extractProcess(int index){}
+//
+//    void ageProcesses(){}
+//
+//    double averageWaitingTime(){}
+//
+//    double averageTurnAroundTime(){}
+//
+//    int getWaitingTime(Process p){}
+//
+//    int getTurnAroundTime(Process p){}
 
 }
