@@ -25,6 +25,9 @@ public class PriorityScheduler {
         currentProcess = processes[0];
         currentProcessIndex = 0;
     }
+    Process getQueuedProcess(int index){
+        return processQueue.get(index);
+    }
     void startScheduler(){
         while(processesCount != 0) {
             while(currentTime < nextProcessArrival()) {
@@ -50,7 +53,9 @@ public class PriorityScheduler {
     }
 
     void runProcess(Process p){}
-    void addProcess(Process p){}
+    void addProcess(Process p){
+        processQueue.add(p);
+    }
 
     int findHighestPriority(){
         int min = processQueue.get(0).getProcessPriority();
@@ -64,7 +69,7 @@ public class PriorityScheduler {
         return priorityIndex;
     }
     int nextProcessArrival(){
-        return processQueue.get(processQueue.size()).getArrivalTime();
+        return processes[currentProcessIndex + 1].getArrivalTime();
     }
     Process extractProcess(int index){}
 
