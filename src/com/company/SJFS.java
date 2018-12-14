@@ -42,18 +42,20 @@ public class SJFS {
                         minIndex = i;
                     }
                 }
+
                 if (currentProcess.getName() != processQueue.get(minIndex).getName()) {
-                    System.out.println("HMM");
-                    int count=1;
-                    while(count!=contextSwitch){
-                    currentTime += count;
-                    for (int i = 0; i < processes.length; i++) {
-                        if (currentTime == processes[i].getArrivalTime())
-                            addProcess(processes[i]);
+                    System.out.println("Switching..");
+                    int count=0;
+                    while(count!=contextSwitch ){
+                        currentTime += 1;
+                        for (int i = 0; i < processes.length; i++) {
+                            if (currentTime == processes[i].getArrivalTime())
+                                addProcess(processes[i]);
+                        }
+                        count++;
                     }
-                    count++;
                 }
-                }
+
                 minProcess = processQueue.get(minIndex);
                 currentProcess = minProcess;
 
@@ -76,16 +78,16 @@ public class SJFS {
         int avgWaitingTime=0;
         int avgTurnAroundTime=0;
         System.out.println("Processes  Burst time  Waiting time  Turn around time");
-      for(int i=0; i<processes.length;i++){
-        System.out.println( processes[i].getName() +"  " + processes[i].getBurstTime() + "  " + processes[i].getWaitingTime() + "  "+ processes[i].getTurnAroundTime());
-        avgWaitingTime+= processes[i].getWaitingTime();
-        avgTurnAroundTime+= processes[i].getTurnAroundTime();
-      }
+        for(int i=0; i<processes.length;i++){
+            System.out.println( processes[i].getName() +"  " + processes[i].getBurstTime() + "  " + processes[i].getWaitingTime() + "  "+ processes[i].getTurnAroundTime());
+            avgWaitingTime+= processes[i].getWaitingTime();
+            avgTurnAroundTime+= processes[i].getTurnAroundTime();
+        }
 
         System.out.println("Average waiting time = "+ avgWaitingTime);
         System.out.println("Average turn around time = "+ avgTurnAroundTime);
-        }
-
-
     }
+
+
+}
 
