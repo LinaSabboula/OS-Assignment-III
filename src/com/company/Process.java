@@ -59,4 +59,7 @@ public class Process {
 
     public void setTurnAroundTime(int turnAroundTime){this.turnAroundTime = turnAroundTime;}
 
+    public String getProcessName() {
+        return processName;
+    }
 }
