@@ -1,5 +1,3 @@
-package com.company;
-
 public class Process {
     private int processPriority = 0;
     private int burstTime = 0;
@@ -25,6 +23,10 @@ public class Process {
 
     public int getBurstTime() {
         return burstTime;
+    }
+
+    public void setBurstTime(int burstTime) {
+        this.burstTime = burstTime;
     }
 
     public int getRemainingTime() {
@@ -58,5 +60,7 @@ public class Process {
     }
 
     public void setTurnAroundTime(int turnAroundTime){this.turnAroundTime = turnAroundTime;}
+
+    public String getProcessName(){return this.processName;}
 
 }

@@ -1,4 +1,3 @@
-package com.company;
 import java.util.Scanner;
 
 public class Main {
@@ -45,6 +44,7 @@ public class Main {
 
         System.out.println("RR: ");
         // Call function
+        RR.RR(processList,rq,t);
 
         System.out.println("Priority Scheduling: ");
         //Call function
@@ -54,6 +54,3 @@ public class Main {
 
     }
 }
-
-
-
