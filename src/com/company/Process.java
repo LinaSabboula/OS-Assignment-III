@@ -1,3 +1,5 @@
+package com.company;
+
 public class Process {
     private int processPriority = 0;
     private int burstTime = 0;
@@ -43,9 +45,6 @@ public class Process {
         return quantum;
     }
 
-    public String getProcessName() {
-        return processName;
-    }
 
     public void setRemainingTime(int remainingTime){ this.remainingTime = remainingTime;}
 
