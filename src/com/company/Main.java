@@ -27,8 +27,10 @@ public class Main {
             Process p = new Process(name, arrivalTime, burstTime, priority, quantum);
             processList[i] = p;
         }
+
+        //sort processList first
         Process temp;
-        for (int i = 1; i < n; i++) {
+        for (int i = 1; i < processList.length; i++) {
             for (int j = i; j > 0; j--) {
                 if (processList[j].getArrivalTime() < processList[j - 1].getArrivalTime()) {
                     temp = processList[j];
@@ -37,7 +39,6 @@ public class Main {
                 }
             }
         }
-
 
         System.out.println("SRJF: ");
         // Call function
@@ -48,6 +49,9 @@ public class Main {
 
         System.out.println("Priority Scheduling: ");
         //Call function
+        PriorityScheduler priorityScheduler = new PriorityScheduler(processList);
+        priorityScheduler.startScheduler();
+        System.out.println("======================================");
 
         System.out.println("AG Scheduling: ");
         //Call function

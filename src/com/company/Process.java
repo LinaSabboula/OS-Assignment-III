@@ -43,6 +43,10 @@ public class Process {
         return quantum;
     }
 
+    public String getProcessName() {
+        return processName;
+    }
+
     public void setRemainingTime(int remainingTime){ this.remainingTime = remainingTime;}
 
     public void setArrivalTime(int arrivalTime) {
